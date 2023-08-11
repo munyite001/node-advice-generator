@@ -23,9 +23,10 @@ app.get('/get-advice', async (req, res) => {
         const response = await fetch('https://api.adviceslip.com/advice');
         const data = await response.json();
         const advice = data.slip.advice;
+        const id = data.slip.id;
 
         //  Send the new advice as a json response
-        res.json({advice});
+        res.json({advice, id});
     } catch (error) {
         console.error("Error fetching new advice: ", error.message);
         res.status(500).json({error: "An error occured while fetching advice"});
